@@ -1,0 +1,51 @@
+<div class="container py-5" data-bs-theme="dark">
+    <div class="row justify-content-center">
+        <div class="col-11 col-sm-8 col-md-6 col-lg-4">
+
+            <div class="card border-secondary">
+                @switch (estado()) {
+                    @case ('ok') {
+                        <div class="card-body p-4">
+                            <h3>Sua compra foi finalizada</h3><br>
+                            @if (numero() > 0) {
+                                Pedido nº {{numero()}}<br><br>
+                            }
+                            Sua compra chegara em sua casa dentro de um periodo de 3 dias uteis
+                            @if (aviso()) {
+                                <div class="alert alert-warning mt-3">{{aviso()}}</div>
+                            }
+                        </div>
+                    }
+                    @case ('semLogin') {
+                        <div class="card-body p-4">
+                            <h3>Faça login para finalizar</h3><br>
+                            Você precisa estar logado para finalizar o pedido.
+                            <a href="/login" class="link-danger">Entrar</a>
+                        </div>
+                    }
+                    @case ('vazia') {
+                        <div class="card-body p-4">
+                            <h3>Sua cesta está vazia</h3><br>
+                            Não há nada para finalizar.
+                        </div>
+                    }
+                    @case ('erro') {
+                        <div class="card-body p-4">
+                            <h3>Não foi possível finalizar</h3><br>
+                            {{aviso()}}
+                        </div>
+                    }
+                    @default {
+                        <div class="card-body p-4">
+                            <h3>Finalizando seu pedido...</h3>
+                        </div>
+                    }
+                }
+                <div class="card-footer text-center">
+                    Voltar a <a href="vitrine" class="link-danger">Pagina de Produtos</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

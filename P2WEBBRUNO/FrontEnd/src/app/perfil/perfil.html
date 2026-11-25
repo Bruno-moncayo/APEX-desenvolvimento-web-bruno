@@ -1,0 +1,82 @@
+<div class="container py-5" data-bs-theme="dark">
+  <div class="row justify-content-center">
+    <div class="col-11 col-sm-8 col-md-6 col-lg-4">
+
+      <div class="card border-secondary">
+        <div class="card-body p-4">
+          <h4 class="card-title text-white mb-1">Meu perfil</h4>
+          <p class="text-secondary mb-4">Veja e edite os seus dados.</p>
+
+          @if (mensagem()) {
+            <div class="alert alert-success">{{mensagem()}}</div>
+          }
+          @if (erro()) {
+            <div class="alert alert-danger">{{erro()}}</div>
+          }
+
+          <form>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome de usuário" [(ngModel)]="obj.nome">
+              <label for="nome">Nome de usuário</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" [(ngModel)]="obj.email">
+              <label for="email">E-mail</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" [(ngModel)]="obj.telefone">
+              <label for="telefone">Telefone</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="documento" name="documento" placeholder="Documento" [(ngModel)]="obj.documento">
+              <label for="documento">Documento</label>
+            </div>
+
+            <div class="form-floating mb-4">
+              <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Endereço" [(ngModel)]="obj.logradouro">
+              <label for="logradouro">Endereço</label>
+            </div>
+
+            <button type="button" class="btn btn-danger btn-lg w-100" [disabled]="!pronto()" (click)="salvar()">Salvar alterações</button>
+          </form>
+
+          <hr class="border-secondary my-4">
+
+          <h5 class="text-white mb-3">Alterar senha</h5>
+
+          @if (mensagemSenha()) {
+            <div class="alert alert-success">{{mensagemSenha()}}</div>
+          }
+          @if (erroSenha()) {
+            <div class="alert alert-danger">{{erroSenha()}}</div>
+          }
+
+          <form>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" placeholder="Senha atual" [(ngModel)]="senhaAtual">
+              <label for="senhaAtual">Senha atual</label>
+            </div>
+
+            <div class="form-floating mb-4">
+              <input type="password" class="form-control" id="novaSenha" name="novaSenha" placeholder="Nova senha" [(ngModel)]="novaSenha">
+              <label for="novaSenha">Nova senha</label>
+            </div>
+
+            <button type="button" class="btn btn-outline-light w-100" (click)="alterarSenha()">Alterar senha</button>
+          </form>
+        </div>
+
+        <div class="card-footer text-center border-secondary">
+          <button type="button" class="btn btn-outline-danger w-100" (click)="sair()">Sair</button>
+        </div>
+        <div class="card-footer text-center border-secondary">
+          <button type="button" class="btn btn-outline-danger w-100" (click)="remover()">Deletar conta</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

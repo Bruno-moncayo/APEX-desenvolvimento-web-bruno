@@ -1,0 +1,69 @@
+<div class="container py-4" data-bs-theme="dark">
+  <h4 class="text-white mb-4">Cesta de compras</h4>
+
+  @if (itens.length == 0) {
+    <div class="card border-secondary text-center p-5">
+      <p class="text-secondary mb-3">Sua cesta está vazia.</p>
+      <div>
+        <a href="/" class="btn btn-danger">Ver produtos</a>
+      </div>
+    </div>
+  } @else {
+    <div class="row g-4">
+
+      <div class="col-lg-8">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Qtd.</th>
+                <th>Preço</th>
+                <th>Subtotal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of itens; track item.produto.codigo) {
+                <tr>
+                  <td>{{item.produto.nome}}</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <button type="button" class="btn btn-outline-light btn-sm" (click)="diminuir(item)" [disabled]="item.quantidade <= 1">-</button>
+
+                      <span class="fw-semibold">{{item.quantidade}}</span>
+
+                      <button type="button" class="btn btn-outline-light btn-sm" (click)="aumentar(item)" [disabled]="item.quantidade >= item.produto.quantidade">+</button>
+                    </div>
+                  </td>
+                  <td>R$ {{preco(item).toFixed(2).replace('.', ',')}}</td>
+                  <td class="text-danger fw-bold">
+                    R$ {{(preco(item) * item.quantidade).toFixed(2).replace('.', ',')}}
+                  </td>
+                  <td class="text-end">
+                    <button type="button" class="btn btn-outline-danger btn-sm" (click)="remover(item)">Remover</button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-secondary">
+          <div class="card-body p-4">
+            <h5 class="card-title text-white mb-3">Resumo</h5>
+            <div class="d-flex justify-content-between mb-4">
+              <span class="text-secondary">Total</span>
+              <span class="text-danger fs-4 fw-bold">R$ {{total().toFixed(2).replace('.', ',')}}</span>
+            </div>
+            <a href="/pedido" class="btn btn-danger btn-lg w-100 mb-2">Finalizar pedido</a>
+            <a href="/" class="btn btn-outline-light w-100">Continuar comprando</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  }
+</div>

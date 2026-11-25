@@ -1,0 +1,27 @@
+<div class="d-flex flex-column min-vh-100">
+
+  <!-- Topo: a logo fica na ponta ESQUERDA e a bolinha do motoqueiro na ponta DIREITA -->
+  <header class="d-flex align-items-center justify-content-between px-3 py-2">
+    <img src="Logotipo.png" alt="Apex" height="60px">
+
+    <div class="d-flex align-items-center gap-3">
+      @if (clienteService.logado(); as c) {
+        <!-- logado: a bolinha leva para a tela do perfil (o "Sair" fica no fim dela) -->
+        <span class="text-secondary">Olá, {{c.nome}}</span>
+        <a href="perfil" title="Meu perfil" class="perfil-link">
+          <img src="Perfil.jpg" alt="Meu perfil" height="60px" class="perfil rounded-circle">
+        </a>
+      } @else {
+        <!-- deslogado: a bolinha leva para o login -->
+        <a href="login" title="Entrar" class="perfil-link">
+          <img src="Perfil.jpg" alt="Entrar" height="60px" class="perfil rounded-circle">
+        </a>
+      }
+    </div>
+  </header>
+
+  <app-menu></app-menu>
+
+  <router-outlet />
+  <app-rodape></app-rodape>
+</div>
